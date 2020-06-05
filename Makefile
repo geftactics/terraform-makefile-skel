@@ -17,7 +17,6 @@
 .PHONY: apply destroy-backend destroy destroy-target plan-destroy plan plan-target prep
 -include Makefile.env
 VARS="variables/$(ENV)-$(REGION).tfvars"
-CURRENT_FOLDER=$(shell basename "$$(pwd)")
 S3_BUCKET="tfstate-$(COMPANY)-$(ENV)-$(REGION)"
 DYNAMODB_TABLE="tflock-$(COMPANY)-$(ENV)-$(REGION)"
 WORKSPACE="$(ENV)-$(REGION)"
@@ -41,6 +40,10 @@ set-env:
 	 fi
 	@if [ -z $(AWS_PROFILE) ]; then \
 		echo "$(BOLD)$(RED)AWS_PROFILE was not set.$(RESET)"; \
+		ERROR=1; \
+	 fi
+	@if [ -z $(STACK) ]; then \
+		echo "$(BOLD)$(RED)STACK was not set$(RESET)"; \
 		ERROR=1; \
 	 fi
 	@if [ ! -z $${ERROR} ] && [ $${ERROR} -eq 1 ]; then \
@@ -96,7 +99,7 @@ prep: set-env ## Prepare a new workspace (environment) if needed, configure the 
 		-backend-config="profile=$(AWS_PROFILE)" \
 		-backend-config="region=$(REGION)" \
 		-backend-config="bucket=$(S3_BUCKET)" \
-		-backend-config="key=$(ENV)/$(CURRENT_FOLDER)/terraform.tfstate" \
+		-backend-config="key=$(ENV)/$(STACK)/terraform.tfstate" \
 		-backend-config="dynamodb_table=$(DYNAMODB_TABLE)"\
 	    -backend-config="acl=private"
 	@echo "$(BOLD)Switching to workspace $(WORKSPACE)$(RESET)"
