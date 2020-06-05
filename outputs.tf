@@ -1,3 +1,3 @@
-output "example_sg_name" {
-  value = aws_security_group.example.name
+output "example_s3" {
+  value = aws_s3_bucket.example.bucket_domain_name
 }
