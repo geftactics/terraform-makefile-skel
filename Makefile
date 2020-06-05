@@ -15,6 +15,7 @@
 .ONESHELL:
 .SHELL := /usr/bin/bash
 .PHONY: apply destroy-backend destroy destroy-target plan-destroy plan plan-target prep
+-include Makefile.env
 VARS="variables/$(ENV)-$(REGION).tfvars"
 CURRENT_FOLDER=$(shell basename "$$(pwd)")
 S3_BUCKET="tfstate-$(ENV)-$(REGION)"
