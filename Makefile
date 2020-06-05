@@ -18,8 +18,8 @@
 -include Makefile.env
 VARS="variables/$(ENV)-$(REGION).tfvars"
 CURRENT_FOLDER=$(shell basename "$$(pwd)")
-S3_BUCKET="tfstate-$(ENV)-$(REGION)"
-DYNAMODB_TABLE="tflock-$(ENV)-$(REGION)"
+S3_BUCKET="tfstate-$(COMPANY)-$(ENV)-$(REGION)"
+DYNAMODB_TABLE="tflock-$(COMPANY)-$(ENV)-$(REGION)"
 WORKSPACE="$(ENV)-$(REGION)"
 BOLD=$(shell tput bold)
 RED=$(shell tput setaf 1)
