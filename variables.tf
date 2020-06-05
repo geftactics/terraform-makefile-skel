@@ -2,4 +2,4 @@ variable "env" {}
 
 variable "region" {}
 
-variable "sg_name" {}
+variable "s3_name" {}
