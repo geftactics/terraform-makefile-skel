@@ -1,4 +1,4 @@
 env    = "staging"
 region = "eu-west-1"
 
-sg_name = "Example STAGING secruity group"
+s3_name = "example-staging-bucket"
