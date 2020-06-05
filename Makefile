@@ -103,7 +103,7 @@ prep: set-env ## Prepare a new workspace (environment) if needed, configure the 
 		-backend-config="dynamodb_table=$(DYNAMODB_TABLE)"\
 	    -backend-config="acl=private"
 	@echo "$(BOLD)Switching to workspace $(WORKSPACE)$(RESET)"
-	@terraform workspace new $(WORKSPACE)
+	@terraform workspace select $(WORKSPACE) || terraform workspace new $(WORKSPACE)
 
 plan: prep ## Show what terraform thinks it will do
 	@terraform plan \
